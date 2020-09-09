@@ -170,7 +170,8 @@ class Query:
 
     def delete_temp_reviews_table(self) -> str:
         """
-        Method that returns events of the day
+        Method that returns events
+        of the day
         """
         command = """
                     truncate table dm_content_sac.temp_reviews 
