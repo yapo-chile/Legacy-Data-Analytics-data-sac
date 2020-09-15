@@ -1,0 +1,14 @@
+version: '3'
+ 
+services:
+  app:
+    image: ${DOCKER_IMAGE_COMPOSE}
+    container_name: ${DOCKER_CONTAINER_NAME}
+    expose:
+      - "5000"
+    environment:
+      APP_DW_SECRET: /app/dw-secret
+      APP_SURVEYPAL_API_SECRET: /app/surveypal-api-secret
+    volumes:
+      - ./secrets/dw/secrets_DW:/app/dw-secret
+      - ./secrets/surveypal/secrets_surveypal:/app/surveypal-api-secret

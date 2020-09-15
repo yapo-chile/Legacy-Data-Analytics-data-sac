@@ -1,0 +1,60 @@
+- defaultTab: nodes
+  description: |-
+        This pipeline makes available data associated with customer service
+        performed by the SAC team. From this data you can obtain information
+        associated with NPS indicator which is an indicator that proposes
+        to measure the loyalty of a company's clients based on the recommendations.
+        The Net Promoter Score is based on a single question: "How likely are you
+        to recommend the product or service to a family member or friend?"
+        To do this, they are asked to rate on a scale from 0 to 10, where 0 is
+        "Very unlikely" and 10 is "I would definitely recommend it." According
+        to the results, clients are classified into promoters, liabilities and detractors.
+  executionEnabled: true
+  group: GLOBAL-METRIC
+  loglevel: DEBUG
+  name: SAC - Net-promoter-score
+  nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: 'name: dockerhost'
+  nodesSelectedByDefault: true
+  notification:
+    onfailure:
+      email:
+        recipients: data_team@adevinta.com
+        subject: ${job.execid} ${execution.status} ${job.name} - Fallo definitivo
+    onretryablefailure:
+      email:
+        recipients: data_team@adevinta.com
+        subject: ${job.execid} ${execution.status} ${job.name} - Fallo por reintento
+  notifyAvgDurationThreshold: null
+  scheduleEnabled: true
+  schedule:
+    month: '*'
+    time:
+      hour: '09'
+      minute: '0'
+      seconds: '0'
+    weekday:
+      day: '*'
+    year: '*'
+  retry:
+    retry: 3
+    delay: 20m
+  sequence:
+    commands:
+    - script: |-
+        sudo docker pull containers.mpi-internal.com/yapo/net-promoter-score:latest
+        sudo docker run --rm -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
+                        -v /home/bnbiuser/secrets/secrets_surveypal:/app/surveypal-api-secret \
+                        -e APP_DW_SECRET=/app/db-secret \
+                        -e APP_SURVEYPAL_API_SECRET=/app/surveypal-api-secret \
+                        containers.mpi-internal.com/yapo/net-promoter-score:latest
+    keepgoing: false
+    strategy: node-first
+  timeZone: America/Santiago
