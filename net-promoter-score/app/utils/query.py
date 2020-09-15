@@ -65,7 +65,7 @@ class Query:
 
     def delete_surveypal_nps_answers_table(self) -> str:
         """
-        Method that returns events of the day
+        Method that returns events of the  day
         """
         command = """
                     delete from dm_content_sac.nps_answers

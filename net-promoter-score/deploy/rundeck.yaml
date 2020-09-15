@@ -1,14 +1,10 @@
 - defaultTab: nodes
   description: |-
+        Repo: Yapo / data-sac/net-promoter-score
         This pipeline makes available data associated with customer service
         performed by the SAC team. From this data you can obtain information
         associated with NPS indicator which is an indicator that proposes
         to measure the loyalty of a company's clients based on the recommendations.
-        The Net Promoter Score is based on a single question: "How likely are you
-        to recommend the product or service to a family member or friend?"
-        To do this, they are asked to rate on a scale from 0 to 10, where 0 is
-        "Very unlikely" and 10 is "I would definitely recommend it." According
-        to the results, clients are classified into promoters, liabilities and detractors.
   executionEnabled: true
   group: GLOBAL-METRIC
   loglevel: DEBUG
