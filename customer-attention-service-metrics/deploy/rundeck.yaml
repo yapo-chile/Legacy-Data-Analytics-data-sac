@@ -1,0 +1,64 @@
+- defaultTab: nodes
+  description: |-
+        Repo: Yapo / data-sac/customer-attention-service-metrics
+        This pipeline makes available data associated with customer service
+        performed by the SAC team. From this data you can obtain information
+        associated with reasons for requesting attention, date of opening and
+        resolution of the attention case, attention channel, results of satisfaction surveys,
+        among other data more associated with the requesting client. This data is obtained
+        through the interaction with various endpoints available on the
+        Zendesk and Surveypal platforms and is recorded in our datawarehouse
+        after being transformed into this pipeline.
+  executionEnabled: true
+  group: GLOBAL-METRIC
+  loglevel: DEBUG
+  name: SAC - Customer-attention-service-metrics
+  nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: 'name: dockerhost'
+  nodesSelectedByDefault: true
+  notification:
+    onfailure:
+      email:
+        recipients: data_team@adevinta.com
+        subject: ${job.execid} ${execution.status} ${job.name} - Fallo definitivo
+    onretryablefailure:
+      email:
+        recipients: data_team@adevinta.com
+        subject: ${job.execid} ${execution.status} ${job.name} - Fallo por reintento
+  notifyAvgDurationThreshold: null
+  scheduleEnabled: true
+  schedule:
+    month: '*'
+    time:
+      hour: '*'
+      minute: '0'
+      seconds: '0'
+    weekday:
+      day: '*'
+    year: '*'
+  retry:
+    retry: 3
+    delay: 20m
+  sequence:
+    commands:
+    - script: |-
+        sudo docker pull containers.mpi-internal.com/yapo/customer-attention-service-metrics:latest
+        sudo docker run --rm -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
+                        -v /home/bnbiuser/secrets/secrets_zendesk:/app/zendesk-api-secret \
+                        -v /home/bnbiuser/secrets/secrets_surveypal:/app/surveypal-api-secret \
+                        -e APP_DW_SECRET=/app/db-secret \
+                        -e APP_ZENDESK_API_SECRET=/app/zendesk-api-secret \
+                        -e APP_SURVEYPAL_API_SECRET=/app/surveypal-api-secret \
+                        containers.mpi-internal.com/yapo/customer-attention-service-metrics:latest \
+                        -email_from="noreply@yapo.cl" \
+                        -email_to="data_team@adevinta.com"
+    keepgoing: false
+    strategy: node-first
+  timeZone: America/Santiago

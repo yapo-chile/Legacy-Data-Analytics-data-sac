@@ -30,6 +30,9 @@ class Process():
         """
         query = Query(config, self.params)
         db_source = Database(conf=config)
+        if self.params.get_reprocess_flag() == 'yes':
+            db_source.execute_command(query \
+                .delete_surveypal_nps_answers_with_reprocess())
         data_nps_max_update = db_source.select_to_dict(query \
             .get_nps_max_update())
         db_source.close_connection()

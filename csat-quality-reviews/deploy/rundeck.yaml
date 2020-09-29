@@ -1,5 +1,6 @@
 - defaultTab: nodes
   description: |-
+        Repo: Yapo / data-sac/csat-quality-reviews
         This pipeline makes available data associated with customer service
         performed by the SAC and Quality team. From this data you can obtain information
         associated with number of customer moderations for different dimensions adding the information
@@ -9,7 +10,7 @@
   executionEnabled: true
   group: GLOBAL-METRIC
   loglevel: DEBUG
-  name: Csat-and-quality-reviews
+  name: SAC - Csat-and-quality-reviews
   nodeFilterEditable: false
   nodefilters:
     dispatch:
