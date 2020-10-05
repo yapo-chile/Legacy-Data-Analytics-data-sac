@@ -78,3 +78,15 @@ class Query:
                             where t.answerid is not null) """
 
         return command
+
+    def delete_surveypal_nps_answers_with_reprocess(self) -> str:
+        """
+        Method that returns events of the day
+        """
+        command = """
+                    delete from dm_content_sac.nps_answers where
+                    "startDate"::date >= '""" \
+                        + self.params.get_date_from() + """'::date
+                """
+
+        return command

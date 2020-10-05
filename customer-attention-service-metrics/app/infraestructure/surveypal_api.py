@@ -36,7 +36,7 @@ class SurveypalApi:
 
     def get_data(self, survey_id: str, date_from: str) -> pd.DataFrame:
         """
-        Method that returns json response from query to surveypal api
+        Method that returns json response from query to zendesk api
         """
         endpoint = '/survey/{0}/answers?from={1}&to=now' \
             .format(survey_id, date_from)
