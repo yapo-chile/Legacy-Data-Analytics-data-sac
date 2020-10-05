@@ -6,9 +6,9 @@
         associated with NPS indicator which is an indicator that proposes
         to measure the loyalty of a company's clients based on the recommendations.
   executionEnabled: true
-  group: GLOBAL-METRIC
+  group: SAC
   loglevel: DEBUG
-  name: SAC - Net-promoter-score
+  name: Net-promoter-score
   nodeFilterEditable: false
   nodefilters:
     dispatch:

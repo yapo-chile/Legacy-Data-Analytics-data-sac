@@ -24,9 +24,9 @@ Finally, it is important to mention that regarding the execution and re-executio
 |                   |      ods.category                                                           |
 | Output Source     | DWH: dm_content_sac.pro_reviews                                             |
 |                   |      dm_content_sac.agg_reviews                                             |
-|                          dm_content_sac.temp_reviews                                            |
+|                   |      dm_content_sac.temp_reviews                                            |
 | Schedule          | At 09:00 AM                                                                 |
-| Rundeck Access    | data jobs: GLOBAL-METRIC: Peak - Content-SAC                                |
+| Rundeck Access    | data jobs: SAC: Csat-and-quality-reviews                                    |
 | Associated Report | Content&Sac SQUAD:                                                          |
 |                   |    https://tableau.mpi-internal.com/#/site/sch-cl-yapo/workbooks/12268/views|
 |                   | SAC KPIs:                                                                   |

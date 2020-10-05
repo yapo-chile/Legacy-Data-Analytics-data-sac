@@ -12,8 +12,8 @@ class ReadParams:
         self.str_parse_params = str_parse_params
         self.date_from = None
         self.date_to = None
-        self.reprocess = None
         self.master = None
+        self.reprocess = None
         self.email_from = None
         self.email_to = []
         self.logger = logging.getLogger('readParams')
@@ -75,18 +75,19 @@ class ReadParams:
         tmp_date = datetime.datetime(self.date_from.year - 1, 1, 1)
         return str((tmp_date + timedelta(days=delta)).strftime('%Y-%m-%d'))
 
-
     def get_master(self) -> str:
         """
         Method that get master attribute
         """
         return self.master
 
-    def get_reprocess_flag(self) -> str:
+    def get_reprocess_flag(self) -> bool:
         """
         Method that get reprocess flag attribute
         """
-        return self.reprocess
+        if self.reprocess == 'Y':
+            return True
+        return False
 
     def set_date_from(self, date_from: datetime):
         """
@@ -138,8 +139,7 @@ class ReadParams:
         if self.date_from is None:
             temp_date = current_date + timedelta(days=-1)
             self.date_from = temp_date
-        else:
-            self.reprocess = 'yes'
+        else: self.reprocess = 'Y'
         if self.date_to is None:
             temp_date = current_date + timedelta(days=-1)
             self.date_to = temp_date
@@ -154,7 +154,7 @@ class ReadParams:
         self.logger.info('Date to   : %s', self.date_to)
         self.logger.info('Current year : %s', self.get_current_year())
         self.logger.info('Last year : %s', self.get_last_year())
-        self.logger.info('Reprocess : %s', self.reprocess)
+        self.logger.info('Reprocess : %s', self.get_reprocess_flag())
         self.logger.info('Node : %s', self.master)
         self.logger.info('Email from : %s', self.email_from)
         self.logger.info('Email to : {}'.format(", ".join(self.email_to)))

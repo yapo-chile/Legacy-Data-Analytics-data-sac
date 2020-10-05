@@ -13,6 +13,9 @@ class Process(Ticket, Surveypal):
         self.params = params
         self.logger = logger
 
+    # pylint: disable=W0201
     def generate(self):
+        self.data_api_zendesk_tables = self.config.zendesk_api
         self.save_to_zendesk_tickets()
+        self.data_api_surveypal_csat_answers = self.config.surveypal_api
         self.save_to_surveypal_answers()

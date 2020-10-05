@@ -1,4 +1,3 @@
-import sys
 import logging
 import pandas as pd
 import requests
@@ -35,10 +34,12 @@ class SurveypalApi:
         self.session = requests.Session()
         self.session.headers.update(headers)
 
-    def get_data(self, endpoint: str) -> pd.DataFrame:
+    def get_data(self, survey_id: str, date_from: str) -> pd.DataFrame:
         """
         Method that returns json response from query to surveypal api
         """
+        endpoint = '/survey/{0}/answers?from={1}&to=now' \
+            .format(survey_id, date_from)
         url_dir = self.conf.url + endpoint
         self.log.info('Endpoint : %s', url_dir)
         response = self.session.get(url_dir)
@@ -47,7 +48,9 @@ class SurveypalApi:
                             to Surveypal Answers Source - \
                             Surveypal API. Exiting.',
                           str(response.status_code))
-            sys.exit()
+            raise SystemExit('Error : Data retrived from api failed \
+                with response {0}, {1}'.format(response.status_code,
+                                               response.reason))
 
         json_response = response.json()
 

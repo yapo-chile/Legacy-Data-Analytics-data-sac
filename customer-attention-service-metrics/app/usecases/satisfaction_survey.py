@@ -22,7 +22,7 @@ class Surveypal():
         """
         query = Query(config, self.params)
         db_source = Database(conf=config)
-        if self.params.get_reprocess_flag() == 'yes':
+        if self.params.get_reprocess_flag():
             db_source.execute_command(query \
                 .delete_surveypal_answers_with_reprocess())
         data_surveypal_answers = db_source.select_to_dict(query \
@@ -71,11 +71,9 @@ class Surveypal():
         self.logger.info('Getting extraction CSAT Answers from Surveypal API')
         # Hit to endpoint and retrieve data
         survey_id = '865783919'
-        endpoint = '/survey/{0}/answers?from={1}&to=now' \
-            .format(survey_id, self.data_surveypal_answers)
         data_source = SurveypalApi(conf=config)
 
-        answers = data_source.get_data(endpoint)
+        answers = data_source.get_data(survey_id, self.data_surveypal_answers)
         answers = dict(answers[0])
         answers_df = pd.DataFrame(answers['answers'])
         answers_df_min = answers_df[['email', 'startDate', 'endDate',
@@ -116,7 +114,6 @@ class Surveypal():
         query = Query(self.config, self.params)
         db = Database(conf=self.config.dwh)
         db.execute_command(query.delete_temp_surveypal_answers_table())
-        self.data_api_surveypal_csat_answers = self.config.surveypal_api
         self.logger.info('Inserting data into DWH Surveypal output table')
         for row in self.data_api_surveypal_csat_answers.itertuples():
             data_row = [(row.ticket_id, row.startDate, row.endDate,

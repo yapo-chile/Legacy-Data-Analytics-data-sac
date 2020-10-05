@@ -30,7 +30,7 @@ class Process():
         """
         query = Query(config, self.params)
         db_source = Database(conf=config)
-        if self.params.get_reprocess_flag() == 'yes':
+        if self.params.get_reprocess_flag():
             db_source.execute_command(query \
                 .delete_surveypal_nps_answers_with_reprocess())
         data_nps_max_update = db_source.select_to_dict(query \
@@ -56,11 +56,9 @@ class Process():
 
         # Hit to endpoint and retrieve data
         survey_id = '863343463'
-        endpoint = '/survey/{0}/answers?from={1}&to=now' \
-            .format(survey_id, self.data_nps_max_update)
         data_source = SurveypalApi(conf=config)
         self.logger.info('Getting extraction NPS from Surveypal API')
-        nps_answers = data_source.get_data(endpoint)
+        nps_answers = data_source.get_data(survey_id, self.data_nps_max_update)
         answers = []
 
         # Format data retrieved
@@ -110,7 +108,6 @@ class Process():
         query = Query(self.config, self.params)
         db = Database(conf=self.config.dwh)
         db.execute_command(query.delete_temp_nps_answers_table())
-        self.data_nps_api_surveypal = self.config.surveypal_api
         self.logger.info('Inserting data into DWH output table')
         for row in self.data_nps_api_surveypal.itertuples():
             data_row = [(row.recomendarias, row.comentarios,
@@ -126,4 +123,5 @@ class Process():
 
 
     def generate(self):
+        self.data_nps_api_surveypal = self.config.surveypal_api
         self.save()

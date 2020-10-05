@@ -25,7 +25,7 @@ class Ticket():
         """
         query = Query(config, self.params)
         db_source = Database(conf=config)
-        if self.params.get_reprocess_flag() == 'yes':
+        if self.params.get_reprocess_flag():
             db_source.execute_command(query \
                 .delete_zendesk_tickets_with_reprocess())
         data_zendesk_tickets = db_source.select_to_dict(query \
@@ -265,7 +265,8 @@ class Ticket():
                                  '3rd_order_contact_reason',
                                  'brand_name']].drop_duplicates()
 
-        users_df = users_df[['id', 'email', 'phone']].drop_duplicates()
+        users_df = users_df[['id', 'email', 'phone']] \
+            .drop_duplicates()
 
         metrics_df = metrics_df[['ticket_id', 'reopens', 'replies',
                                  'reply_time_in_minutes',
@@ -336,7 +337,6 @@ class Ticket():
         query = Query(self.config, self.params)
         db = Database(conf=self.config.dwh)
         db.execute_command(query.delete_temp_zendesk_tickets_table())
-        self.data_api_zendesk_tables = self.config.zendesk_api
         self.logger.info('Inserting data into Zendesk DWH output table')
         for row in self.data_api_zendesk_tables.itertuples():
             data_row = [(row.ticket_id, row.created_at, row.updated_at,

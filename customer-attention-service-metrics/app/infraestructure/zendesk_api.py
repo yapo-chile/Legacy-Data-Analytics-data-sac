@@ -1,4 +1,3 @@
-import sys
 import logging
 import time
 import pandas as pd
@@ -52,13 +51,17 @@ class ZendeskApi:
                                 to Ticket Fields Source \
                                 - Zendesk API. Exiting.',
                               str(response.status_code))
-                sys.exit()
+                raise SystemExit('Error : Data retrived from api failed \
+                    with response {0}, {1}'.format(response.status_code,
+                                                   response.reason))
         elif response.status_code != 200:
             self.log.info('Status: %s. Problem with the request \
                             to Ticket Fields Source \
                             - Zendesk API. Exiting.',
                           str(response.status_code))
-            sys.exit()
+            raise SystemExit('Error : Data retrived from api failed \
+                with response {0}, {1}'.format(response.status_code,
+                                               response.reason))
 
         json_response = response.json()
 

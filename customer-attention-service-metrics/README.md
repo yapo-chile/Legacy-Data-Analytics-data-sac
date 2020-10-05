@@ -14,10 +14,12 @@ Finally, it is important to mention that regarding the execution and re-executio
 |   Field           | Description                                                                |
 |-------------------|----------------------------------------------------------------------------|
 | Input Source      | Zendesk API and Surveypal API endpoints                                    |
-| Output Source     | DWH: dm_analysis.surveypal_csat_answers                                    |
-|                   |      dm_analysis.test_zendesk_tickets                                      |
+| Output Source     | DWH: dm_content_sac.temp_surveypal_csat_answers                            |
+|                   |      dm_content_sac.surveypal_csat_answers                                 |
+|                   |      dm_content_sac.temp_zendesk_tickets                                   |
+|                   |      dm_content_sac.zendesk_tickets                                        |
 | Schedule          | hourly                                                                     |
-| Rundeck Access    | data jobs: GLOBAL-METRIC: Peak - Content-SAC                               |
+| Rundeck Access    | data jobs: SAC: Customer-attention-service-metrics                         |
 | Associated Report | Content&Sac SQUAD:                                                         |
 |                   |   https://tableau.mpi-internal.com/#/site/sch-cl-yapo/workbooks/12268/views|
 |                   | SAC KPIs:                                                                  |

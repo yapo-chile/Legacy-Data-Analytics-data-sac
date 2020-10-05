@@ -10,9 +10,9 @@
         Zendesk and Surveypal platforms and is recorded in our datawarehouse
         after being transformed into this pipeline.
   executionEnabled: true
-  group: GLOBAL-METRIC
+  group: SAC
   loglevel: DEBUG
-  name: SAC - Customer-attention-service-metrics
+  name: Customer-attention-service-metrics
   nodeFilterEditable: false
   nodefilters:
     dispatch:

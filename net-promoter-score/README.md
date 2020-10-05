@@ -16,7 +16,7 @@ Finally, it is important to mention that regarding the execution and re-executio
 | Output Source     | DWH: dm_content_sac.nps_answers                                             |
 |                   |      dm_content_sac.temp_nps_answers                                        |
 | Schedule          | At 09:00 AM                                                                 |
-| Rundeck Access    | data jobs: GLOBAL-METRIC: SAC - Net-promoter-score                          |
+| Rundeck Access    | data jobs: SAC: Net-promoter-score                                          |
 | Associated Report | Content&Sac SQUAD:                                                          |
 |                   |    https://tableau.mpi-internal.com/#/site/sch-cl-yapo/workbooks/12268/views|
 |                   | SAC KPIs:                                                                   |
