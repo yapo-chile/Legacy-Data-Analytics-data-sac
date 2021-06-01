@@ -82,7 +82,7 @@ class Process():
         ans_df = pd.DataFrame.from_dict(answers)
         ans_df['Por favor, déjanos tus comentarios o sugerencias aquí'] = \
             ans_df['Por favor, déjanos tus comentarios o sugerencias aquí'] \
-                .map(lambda x: (unidecode(x.lower())).strip())
+                .map(lambda x: (unidecode(str(x).lower())).strip())
 
         # Order and split data retrieved in a new columns
         new_columns = list()
