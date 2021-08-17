@@ -1,10 +1,14 @@
+# TODO: Case when inputs are None or empty
+from __future__ import annotations
+
+
 class DataHandler:
 
     def __init__(self, logger) -> None:
         self.logger = logger
 
     @property
-    def input_emails(self):
+    def input_emails(self) -> list[str]:
         return self.__input_emails
 
     @input_emails.setter
@@ -25,8 +29,9 @@ class DataHandler:
 
         # Validate the input phones string format
         self.validate_array_like_string(input_phones)
-        # Validate the corresponding number of digits in the phone numbers
+        # Parse the string
         phone_list = input_phones.split(', ')
+        # Validate the corresponding number of digits in the phone numbers
         if any(len(phone) != 9 for phone in phone_list):
             raise ValueError(f"A phone number in '{phone_list}' is not valid."
                              "Phone numbers should only have 9 digits (ex: 912345678)")
@@ -34,7 +39,7 @@ class DataHandler:
         phone_list = [phone[1:] for phone in phone_list]
         self.__input_phones = phone_list
 
-    def clean(self, input_emails, input_phones) -> tuple[list[str], list[str]]:
+    def clean_and_parse(self, input_emails, input_phones) -> tuple[list[str], list[str]]:
 
         self.input_emails = input_emails
         self.input_phones = input_phones

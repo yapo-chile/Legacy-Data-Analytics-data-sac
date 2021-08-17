@@ -4,7 +4,7 @@ import pandas as pd
 
 class GoogleSheets:
 
-    def __init__(self, sheet_id, sheet_name):
+    def __init__(self, sheet_id: str, sheet_name: str) -> None:
 
         self.id = sheet_id
         self.sheet_name = sheet_name
