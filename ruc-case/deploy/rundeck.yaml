@@ -1,21 +1,18 @@
 - defaultTab: nodes
   description: |-
-        <Add specific URL or path of the pipeline in github>
+        https://github.mpi-internal.com/Yapo/data-sac/tree/master/ruc-case
         sudo docker run --rm --net=host \
-                    -v /home/bnbiuser/secrets/pulse_auth:/app/pulse-secret \
                     -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
                     -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
-                    -e APP_PULSE_SECRET=/app/pulse-secret \
                     -e APP_DB_SECRET=/app/db-secret \
                     -e APP_SMTP_SECRET=/app/smtp-secret \
                     containers.mpi-internal.com/yapo/ruc-case:latest \
-                    -email_from="noreply@yapo.cl -- if put this options replace default email from" \
-                    -email_to="email 1 to send data -- if put this options replace default emails to" \
-                    -email_to="email n to send data"
+                    -email_from="noreply@yapo.cl" \
+                    -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"
   executionEnabled: true
-  group: DOCKER/<FOLDER RUNDECK LOCATION>
+  group: DOCKER/EMAIL
   loglevel: DEBUG
-  name: <FOLDER RUNDECK LOCATION> - Project Name Template
+  name: EMAIL - RUC Case
   nodeFilterEditable: false
   nodefilters:
     dispatch:
@@ -29,7 +26,7 @@
   notification:
     onfailure:
       email:
-        recipients: data_team@adevinta.com
+        recipients: gp_data_analytics@yapo.cl
         subject: ${job.execid} ${execution.status} ${job.name} - Fallo definitivo
       plugin:
         configuration:
@@ -41,7 +38,7 @@
   schedule:
     month: '*'
     time:
-      hour: '03'
+      hour: '04'
       minute: '0'
       seconds: '0'
     weekday:
@@ -53,15 +50,13 @@
     - script: |-
         sudo docker pull containers.mpi-internal.com/yapo/ruc-case:latest
         sudo docker run --rm --net=host \
-                        -v /home/bnbiuser/secrets/pulse_auth:/app/pulse-secret \
                         -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
                         -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
-                        -e APP_PULSE_SECRET=/app/pulse-secret \
                         -e APP_DB_SECRET=/app/db-secret \
                         -e APP_SMTP_SECRET=/app/smtp-secret \
                         containers.mpi-internal.com/yapo/ruc-case:latest \
                         -email_from="noreply@yapo.cl" \
-                        -email_to="data_team@adevinta.com"
+                        -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"
     keepgoing: false
     strategy: node-first
   timeZone: America/Santiago
