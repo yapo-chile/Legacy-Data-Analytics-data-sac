@@ -30,10 +30,8 @@
     - script: |-
         sudo docker pull containers.mpi-internal.com/yapo/ruc-case:[git-branch]
         sudo docker run --rm --net=host \
-                        -v /home/bnbiuser/secrets/pulse_auth:/app/pulse-secret \
                         -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
                         -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
-                        -e APP_PULSE_SECRET=/app/pulse-secret \
                         -e APP_DB_SECRET=/app/db-secret \
                         -e APP_SMTP_SECRET=/app/smtp-secret \
                         containers.mpi-internal.com/yapo/ruc-case:[git-branch] \
