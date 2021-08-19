@@ -1,10 +1,10 @@
-from query import GenericPhonesQuery
+from utils.query import GenericPhonesQuery
 from infraestructure.psql import Database
 
 
 class GenericPhones(GenericPhonesQuery):
 
-    def __init__(self, logger, config, params):
+    def __init__(self, logger, config, params) -> None:
         super().__init__(params)
         self.logger = logger
         self.config = config

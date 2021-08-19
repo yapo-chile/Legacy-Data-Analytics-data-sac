@@ -1,11 +1,11 @@
 # pylint: disable=no-member
 # utf-8
 from __future__ import annotations
-from data_ingestor import DataIngestor
-from req_manager import RequestManager
-from generic_phones import GenericPhones
-from blocket_schemas import BlocketSchemas
-from req_factory import RequestFactory
+from usecases.data_ingestor import DataIngestor
+from usecases.req_manager import RequestManager
+from usecases.generic_phones import GenericPhones
+from usecases.blocket_schemas import BlocketSchemas
+from usecases.req_factory import RequestFactory
 
 
 class Process:

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from gsheets import GoogleSheets
+from infraestructure.gsheets import GoogleSheets
 
 
 class DataIngestor:

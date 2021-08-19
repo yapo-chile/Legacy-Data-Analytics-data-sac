@@ -1,8 +1,8 @@
 from __future__ import annotations
-from data_handler import DataHandler
-from ruc_case import RucCase
-from user import User
-from output_handler import OutputHandler
+from usecases.data_handler import DataHandler
+from usecases.ruc_case import RucCase
+from usecases.user import User
+from usecases.output_handler import OutputHandler
 
 
 class RequestFactory:

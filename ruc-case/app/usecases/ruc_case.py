@@ -1,6 +1,6 @@
 from __future__ import annotations
 from infraestructure.psql import Database
-from query import RucCaseQuery
+from utils.query import RucCaseQuery
 
 
 class RucCase(RucCaseQuery):
