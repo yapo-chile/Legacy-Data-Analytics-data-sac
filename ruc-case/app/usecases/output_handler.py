@@ -21,23 +21,31 @@ class OutputHandler:
             ads_info.to_excel(writer, sheet_name='ads', index=False)
             ad_reply.to_excel(writer, sheet_name='ad_reply', index=False)
 
-    def send_email(self, filename: str, requester_email: str) -> None:
+    def send_email(self, filename: str, requester_email: str, ruc_id: str) -> None:
 
         data = open(filename, 'rb').read()
         encoded = base64.b64encode(data).decode('UTF-8')
+        body = f""" <h3>Estimad@s, 
+
+        Se adjunta archivo excel con los avisos y conversaciones encontrados en nuestro sitio asociados al RUC {ruc_id}.
+
+        Saludos,
+        D&A Team
+        </h3>
+        <h6><i>Este mensaje fue generado de forma automatica,
+        por favor no responder</i></h6>"""
+
         email = Email(to=self.params.deliver_to + requester_email,
                       subject=f"Inserting Fee Sellers with Yapesos info",
-                      message="""<h3>Buen dia, se adjunta lo solicitado.</h3>
-                        <h6><i>Este mensaje fue generado de forma automatica,
-                        por favor no responder</i></h6>""",
+                      message=body
                       )
         email.attach(
-            "reporte.xlsx",
+            filename,
             encoded,
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
         email.send()
         # Removing file
-        os.remove("output.xlsx")
+        os.remove(filename)
 
     def generate(self,
                  ads_info: type[DataFrame],
@@ -50,5 +58,5 @@ class OutputHandler:
 
         self.create_excel(filename, ads_info, ad_reply)
         self.logger.info(f'Ruc Case {ruc_id} exported to sheets')
-        self.send_email(filename, requester_email)
+        self.send_email(filename, requester_email, ruc_id)
         self.logger.info('Email sent successfully')

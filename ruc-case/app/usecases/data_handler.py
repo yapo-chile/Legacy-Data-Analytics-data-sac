@@ -1,4 +1,3 @@
-# TODO: Case when inputs are None or empty
 from __future__ import annotations
 
 
