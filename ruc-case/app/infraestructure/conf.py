@@ -14,11 +14,10 @@ class AppConfig:
     @environ.config(prefix="GSheets")
     class GoogleSheetsConfig:
         """
+        Class representing the configuration to access the Google Sheets for the request's form responses
         """
-
-        sheet_id = '1bdwa0t4WIkikb_Bd5_A9qGTX5pD4F5O_wY_Rv7GHPi8'
-        sheet_name = 'responses'
-
+        sheet_id: str = '1bdwa0t4WIkikb_Bd5_A9qGTX5pD4F5O_wY_Rv7GHPi8'
+        sheet_name: str = 'responses'
 
     @environ.config(prefix="DB")
     class DBConfig:
