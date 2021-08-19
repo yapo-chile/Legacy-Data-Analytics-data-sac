@@ -4,17 +4,21 @@
 
 ## Description
 
-Introduce here information about the purpose of this ETL, what kind of information it extracts and from where (dwh, pulse, blocket DB, service DB, specifics files, etc) and also specify other important tecnical details such as: execution preconditions, considerations about execution schedule.
+ETL process in charge of the Operations Team (ex SAC) request for ads and ad-reply information about RUC cases.
+The process start reading a public link to a Google Sheet file that is incrementally filled from a Google Form 
+used for the users to generate new requests. This sheet is imported on a daily basis. 
+The output of the process is to send and e-mail with an excel file attached with the data requested, 
+but only if a new request is found.
 
 ## Pipeline Implementation Details
 
 |   Field           | Description                                                                |
 |-------------------|----------------------------------------------------------------------------|
-| Input Source      | Specify type of source and/or table names                                  |
-| Output Source     | Specify type of source and/or table names                                  |
-| Schedule          | hh:mm                                                                      |
+| Input Source      | GoogleSheets & Blocket                                   |
+| Output Source     | N/A                                |
+| Schedule          | 04:00                                                                      |
 | Rundeck Access    | Specify rundeck environment (test/data jobs) and rundeck ETL name          |
-| Associated Report | Specify name and URL of tableau report (if applies)                        |
+| Associated Report | N/A                       |
 
 
 ### Build

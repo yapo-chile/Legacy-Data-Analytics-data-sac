@@ -4,6 +4,10 @@ import pandas as pd
 
 class GoogleSheets:
 
+    """
+    Class that allow to operate with google sheets files
+    """
+
     def __init__(self, sheet_id: str, sheet_name: str) -> None:
 
         self.id = sheet_id
