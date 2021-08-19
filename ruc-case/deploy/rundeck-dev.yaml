@@ -1,0 +1,42 @@
+- defaultTab: nodes
+  description: |-
+        https://github.mpi-internal.com/Yapo/data-sac/tree/master/ruc-case
+        sudo docker run --rm --net=host \
+                        -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
+                        -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
+                        -e APP_DB_SECRET=/app/db-secret \
+                        -e APP_SMTP_SECRET=/app/smtp-secret \
+                        containers.mpi-internal.com/yapo/ruc-case:[git-branch] \
+                        -email_from="noreply@yapo.cl" \
+                        -email_to="fernando.palomera@yapo.cl"
+  executionEnabled: true
+  group: DOCKER/SAC
+  loglevel: DEBUG
+  name: SAC - RUC Case
+  nodeFilterEditable: false
+  nodefilters:
+    dispatch:
+      excludePrecedence: true
+      keepgoing: false
+      rankOrder: ascending
+      successOnEmptyNodeFilter: false
+      threadcount: '1'
+    filter: 'name: dockerhost'
+  nodesSelectedByDefault: true
+  notifyAvgDurationThreshold: null
+  scheduleEnabled: false
+  sequence:
+    commands:
+    - script: |-
+        sudo docker pull containers.mpi-internal.com/yapo/ruc-case:[git-branch]
+        sudo docker run --rm --net=host \
+                        -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
+                        -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
+                        -e APP_DB_SECRET=/app/db-secret \
+                        -e APP_SMTP_SECRET=/app/smtp-secret \
+                        containers.mpi-internal.com/yapo/ruc-case:[git-branch] \
+                        -email_from="noreply@yapo.cl" \
+                        -email_to="fernando.palomera@yapo.cl"
+    keepgoing: false
+    strategy: node-first
+  timeZone: America/Santiago

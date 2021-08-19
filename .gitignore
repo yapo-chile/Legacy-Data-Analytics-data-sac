@@ -16,3 +16,5 @@ Pipfile*
 LICENSE
 README.rst
 pyvenv.cfg
+.DS_Store
+.idea/
