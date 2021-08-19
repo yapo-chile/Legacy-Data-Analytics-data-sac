@@ -1,6 +1,6 @@
 from __future__ import annotations
 from infraestructure.psql import Database
-from query import UserQuery
+from utils.query import UserQuery
 
 
 class User(UserQuery):

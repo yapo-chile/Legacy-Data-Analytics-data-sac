@@ -10,9 +10,9 @@
                     -email_from="noreply@yapo.cl" \
                     -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"
   executionEnabled: true
-  group: DOCKER/EMAIL
+  group: DOCKER/SAC
   loglevel: DEBUG
-  name: EMAIL - RUC Case
+  name: SAC - RUC Case
   nodeFilterEditable: false
   nodefilters:
     dispatch:
