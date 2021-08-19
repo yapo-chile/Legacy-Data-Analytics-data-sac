@@ -9,7 +9,7 @@ class RequestManager:
 
     def get_new_requests(self, df_req: type[DataFrame]) -> type[DataFrame]:
 
-        exec_ts = self.params.get_date_to()
+        exec_ts = datetime.strptime(self.params.get_date_to(), '%Y-%m-%d')
         last_ts = exec_ts - timedelta(days=1)
 
         # Extract the last 20 request rows
