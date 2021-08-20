@@ -4,7 +4,7 @@
 
 ## Description
 
-
+Monthly Implio's report creation and email sending process.
 
 ## Pipeline Implementation Details
 
@@ -12,7 +12,7 @@
 |-------------------|----------------------------------------------------------------------------|
 | Input Source      | Blocket (action_params, action_states, review_logs                         |
 | Output Source     | N/A                                                                        |
-| Schedule          | 04:30                                                                      |
+| Schedule          | 04:30 (1st day of the month)                                               |
 | Rundeck Access    | Data jobs -  DOCKER/SAC/SAC - Implio Report                                |
 | Associated Report | N/A                                                                        |
 

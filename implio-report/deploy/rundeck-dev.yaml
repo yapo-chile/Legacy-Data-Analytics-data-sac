@@ -10,7 +10,7 @@
                         -e APP_SMTP_SECRET=/app/smtp-secret \
                         containers.mpi-internal.com/yapo/implio_report:[git-branch] \
                         -email_from="noreply@yapo.cl" \
-                        -email_to="data_team@adevinta.com"
+                        -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"
   executionEnabled: true
   group: DOCKER/SAC
   loglevel: DEBUG
