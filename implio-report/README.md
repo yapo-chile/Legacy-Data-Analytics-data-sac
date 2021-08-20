@@ -1,20 +1,20 @@
-# implio_report pipeline 
+# implio-report pipeline 
 
-# implio_report
+# implio-report
 
 ## Description
 
-Introduce here information about the purpose of this ETL, what kind of information it extracts and from where (dwh, pulse, blocket DB, service DB, specifics files, etc) and also specify other important tecnical details such as: execution preconditions, considerations about execution schedule.
+
 
 ## Pipeline Implementation Details
 
 |   Field           | Description                                                                |
 |-------------------|----------------------------------------------------------------------------|
-| Input Source      | Specify type of source and/or table names                                  |
-| Output Source     | Specify type of source and/or table names                                  |
-| Schedule          | hh:mm                                                                      |
-| Rundeck Access    | Specify rundeck environment (test/data jobs) and rundeck ETL name          |
-| Associated Report | Specify name and URL of tableau report (if applies)                        |
+| Input Source      | Blocket (action_params, action_states, review_logs                         |
+| Output Source     | N/A                                                                        |
+| Schedule          | 04:30                                                                      |
+| Rundeck Access    | Data jobs -  DOCKER/SAC/SAC - Implio Report                                |
+| Associated Report | N/A                                                                        |
 
 
 ### Build
