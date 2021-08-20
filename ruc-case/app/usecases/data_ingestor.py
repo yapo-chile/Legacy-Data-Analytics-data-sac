@@ -11,3 +11,9 @@ class DataIngestor:
 
         gs = GoogleSheets(self.config.gs)
         return gs.get_data()
+
+    def generate(self, sheet_cols: dict[str, str]) -> type[DataFrame]:
+
+        df = self.get_data()
+        df = df.astype({sheet_cols['phones']: 'object'})
+        return df

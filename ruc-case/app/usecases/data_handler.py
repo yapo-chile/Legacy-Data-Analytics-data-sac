@@ -47,7 +47,7 @@ class DataHandler:
 
     @staticmethod
     def validate_array_like_string(array_like_string: str) -> None:
-        if any(element in [',', ' ', ';'] for element in array_like_string.split(', ')):
+        if any(element in [',', ' ', ';', '.'] for element in array_like_string.split(', ')):
             raise ValueError(
                 f"Input string '{array_like_string}' format not valid."
                 "if the string it's array-like, split the elements by a comma and a space ', '")

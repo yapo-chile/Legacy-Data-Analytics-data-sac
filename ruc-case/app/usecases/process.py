@@ -20,8 +20,16 @@ class Process:
 
     def generate(self) -> None:
 
+        # Google Sheets columns name mapping
+        sheet_cols = {
+            'emails': 'Email(s) asociados al RUC',
+            'phones': 'Teléfono(s) asociados al RUC',
+            'ruc_id': 'RUC (Rol Único de Causa)',
+            'requester_email': 'Email Address'
+        }
+
         self.logger.info(f'Process start')
-        df_req = DataIngestor(config=self.config).get_data()
+        df_req = DataIngestor(config=self.config).generate(sheet_cols=sheet_cols)
         self.logger.info(f'Request table shape: {df_req.shape}')
         new_req = RequestManager(params=self.params)\
             .get_new_requests(df_req)
@@ -37,13 +45,7 @@ class Process:
                                            params=self.params) \
                 .retrieve(years_back=2)
             self.logger.info(f"Generic phones found (sample): {generic_phones[:5]}...")
-            # Google Sheets columns name mapping
-            sheet_cols = {
-                'emails': 'Email(s) asociados al RUC',
-                'phones': 'Teléfono(s) asociados al RUC',
-                'ruc_id': 'RUC (Rol Único de Causa)',
-                'requester_email': 'Email Address'
-            }
+
             for ix, row in new_req.iterrows():
 
                 RequestFactory(logger=self.logger,
