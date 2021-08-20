@@ -23,6 +23,8 @@ class RequestFactory:
         ruc_id = row[cols_dict['ruc_id']]
         req_email = row[cols_dict['requester_email']]
 
+        self.logger.info(f'Starting RUC Case {ruc_id}')
+        self.logger.info(f'input emails: {input_emails}, input phones: {input_phones}')
         emails, phones = DataHandler(logger=self.logger) \
             .clean_and_parse(input_emails, input_phones)
         self.logger.info(f"Data handler output: user_ids: {emails}, phones: {phones}")
@@ -37,3 +39,4 @@ class RequestFactory:
         OutputHandler(logger=self.logger,
                       params=self.params) \
             .generate(df_ads, df_adreply, ruc_id, req_email)
+        self.logger(f'RUC Case {ruc_id} finished')
