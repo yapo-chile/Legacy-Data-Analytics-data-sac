@@ -10,7 +10,7 @@ class RucCase(RucCaseQuery):
 
     def get_ads(self, user_ids: list, blocket_schemas: list) -> type[DataFrame]:
 
-        db_source = Database(config=self.config)
+        db_source = Database(conf=self.config)
         df_ads = db_source.select_to_dict(query=self.query_ads(user_ids, blocket_schemas))
         db_source.close_connection()
 
@@ -18,7 +18,7 @@ class RucCase(RucCaseQuery):
 
     def get_ad_reply(self, user_ids: list, blocket_schemas: list) -> type[DataFrame]:
 
-        db_source = Database(config=self.config)
+        db_source = Database(conf=self.config)
         df_adreply = db_source.select_to_dict(query=self.query_adreply(user_ids, blocket_schemas))
         db_source.close_connection()
 
