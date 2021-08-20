@@ -30,7 +30,7 @@ class AppConfig:
         user: str = INI_DB.secret(name="user", default=environ.var())
         password: str = INI_DB.secret(name="password", default=environ.var())
 
-    gsheets = environ.group(GoogleSheetsConfig)
+    gs = environ.group(GoogleSheetsConfig)
     db = environ.group(DBConfig)
 
 
