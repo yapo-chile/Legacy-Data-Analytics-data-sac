@@ -11,7 +11,7 @@ class User(UserQuery):
 
     def get_users_by_emails(self, emails: list) -> list[int]:
 
-        db_source = Database(config=self.config)
+        db_source = Database(conf=self.config)
         users_df = db_source.select_to_dict(query=self.query_users_by_emails(emails))
         db_source.close_connection()
 
@@ -26,7 +26,7 @@ class User(UserQuery):
         Get the phone numbers associated with the user ids provided
 
         """
-        db_source = Database(config=self.config)
+        db_source = Database(conf=self.config)
         phones = []
         for schema in blocket_schemas:
             phones_df = db_source.select_to_dict(query=self.query_phones(user_ids, schema))
@@ -42,7 +42,7 @@ class User(UserQuery):
 
         # Search the user ids by the results the known phone numbers
         # Get the user ids
-        db_source = Database(config=self.config)
+        db_source = Database(conf=self.config)
         users = []
         for schema in blocket_schemas:
             users_df = db_source.select_to_dict(query=self.query_users(phones, schema))
