@@ -9,5 +9,5 @@ class DataIngestor:
 
     def get_data(self) -> type[DataFrame]:
 
-        gs = GoogleSheets(self.config.GoogleSheetsConfig())
+        gs = GoogleSheets(self.config.gs)
         return gs.get_data()

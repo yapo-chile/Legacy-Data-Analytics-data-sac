@@ -14,4 +14,3 @@ class BlocketSchemas:
         schemas = ['public'] + [f'blocket_{i}' for i in range(current_year - years_back, current_year + 1)]
 
         return schemas
-    
