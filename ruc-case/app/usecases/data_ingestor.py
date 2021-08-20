@@ -15,5 +15,7 @@ class DataIngestor:
     def generate(self, sheet_cols: dict[str, str]) -> type[DataFrame]:
 
         df = self.get_data()
-        df = df.astype({sheet_cols['phones']: 'object'})
+        df.fillna('N/A', inplace=True)
+        df = df.astype({sheet_cols['phones']: 'object',
+                        sheet_cols['emails']: 'object'})
         return df
