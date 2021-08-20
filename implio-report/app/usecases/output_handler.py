@@ -1,5 +1,5 @@
 from __future__ import annotations
-from email import Email
+from infraestructure.email import Email
 import calendar
 
 
@@ -12,14 +12,14 @@ class OutputHandler:
     def send_email(self, data: type[DataFrame]):
 
         year_month = self.params.get_last_month()
-        year = year_month.split('-')[0]
-        month = int(year_month.split('-')[1])
-        month_name = calendar.month_name[month]
+        year_lm = year_month.split('-')[0]
+        last_month = int(year_month.split('-')[1])
+        month_name = calendar.month_name[last_month]
 
-        subject = f'Implio null revisions {month_name} {year}'
+        subject = f'Implio null revisions {month_name} {year_lm}'
         body = f""" <h3>Estimad@s, 
         
-        Se adjunta la base correspondiente al pasado mes, donde se registraron {data.shape[0]} registros.
+        Se adjunta la base correspondiente al pasado mes, donde se obtienen {data.shape[0]} registros.
         
         Saludos,
         D&A Team

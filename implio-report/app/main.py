@@ -10,7 +10,7 @@ from usecases.process import Process
 if __name__ == '__main__':
     CONFIG = getConf()
     TIME = TimeExecution()
-    LOGGER = logging.getLogger('implio_report')
+    LOGGER = logging.getLogger('implio-report')
     DATE_FORMAT = """%(asctime)s,%(msecs)d %(levelname)-2s """
     INFO_FORMAT = """[%(filename)s:%(lineno)d] %(message)s"""
     LOG_FORMAT = DATE_FORMAT + INFO_FORMAT
@@ -18,6 +18,6 @@ if __name__ == '__main__':
     PARAMS = ReadParams(sys.argv)
     TIME.get_time()
     # Calling main process
-    Process(CONFIG, PARAMS).generate()
+    Process(LOGGER, CONFIG, PARAMS).generate()
     # End process
     LOGGER.info('Process ended successfully.')

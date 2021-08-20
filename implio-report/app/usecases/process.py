@@ -1,8 +1,8 @@
 # pylint: disable=no-member
 # utf-8
 from __future__ import annotations
-from implio_report import ImplioReport
-from output_handler import OutputHandler
+from usecases.implio_report import ImplioReport
+from usecases.output_handler import OutputHandler
 
 
 class Process:
@@ -18,13 +18,13 @@ class Process:
 
     def generate(self):
 
-        self.logger.info('')
+        self.logger.info('The process begins')
         df_report = ImplioReport(logger=self.logger,
                                  config=self.config,
                                  params=self.params)\
             .generate()
-        self.logger.info('')
+        self.logger.info(f'Report generated successfully, found {df_report.shape[0]} records')
         OutputHandler(config=self.config,
                       params=self.params)\
             .send_email(data=df_report)
-        self.logger.info('')
+        self.logger.info('Email sent successfully')
