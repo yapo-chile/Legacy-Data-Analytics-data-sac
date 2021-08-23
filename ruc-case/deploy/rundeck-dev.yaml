@@ -2,13 +2,15 @@
   description: |-
         https://github.mpi-internal.com/Yapo/data-sac/tree/master/ruc-case
         sudo docker run --rm --net=host \
-                        -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
-                        -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
-                        -e APP_DB_SECRET=/app/db-secret \
-                        -e APP_SMTP_SECRET=/app/smtp-secret \
-                        containers.mpi-internal.com/yapo/ruc-case:[git-branch] \
-                        -email_from="noreply@yapo.cl" \
-                        -email_to="fernando.palomera@yapo.cl"
+                      -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
+                      -v /home/bnbiuser/secrets/blocket_db:/app/db-blocket \
+                      -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
+                      -e APP_DB_SECRET=/app/db-secret \
+                      -e APP_BLOCKET_SECRET=/app/db-blocket \
+                      -e APP_SMTP_SECRET=/app/smtp-secret \
+                      containers.mpi-internal.com/yapo/ruc-case:latest \
+                      -email_from="noreply@yapo.cl" \
+                      -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"
   executionEnabled: true
   group: DOCKER/SAC
   loglevel: DEBUG
@@ -31,12 +33,14 @@
         sudo docker pull containers.mpi-internal.com/yapo/ruc-case:[git-branch]
         sudo docker run --rm --net=host \
                         -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
+                        -v /home/bnbiuser/secrets/blocket_db:/app/db-blocket \
                         -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
                         -e APP_DB_SECRET=/app/db-secret \
+                        -e APP_BLOCKET_SECRET=/app/db-blocket \
                         -e APP_SMTP_SECRET=/app/smtp-secret \
-                        containers.mpi-internal.com/yapo/ruc-case:[git-branch] \
+                        containers.mpi-internal.com/yapo/ruc-case:latest \
                         -email_from="noreply@yapo.cl" \
-                        -email_to="fernando.palomera@yapo.cl"
+                        -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"
     keepgoing: false
     strategy: node-first
   timeZone: America/Santiago
