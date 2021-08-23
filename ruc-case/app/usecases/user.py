@@ -77,6 +77,8 @@ class User(UserQuery):
             # Search at the first iteration only for every phone found yet
             if iteration == 1:
                 new_phones = phones_found
+            if not new_phones:
+                break
             # Extract user ids from phones number
             new_users = self.get_users_by_phones(new_phones, blocket_schemas)
             # Remove and users found before
