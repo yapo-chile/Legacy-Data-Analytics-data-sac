@@ -1,5 +1,5 @@
 from __future__ import annotations
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class RequestManager:
@@ -9,12 +9,11 @@ class RequestManager:
 
     def get_new_requests(self, df_req: type[DataFrame]) -> type[DataFrame]:
 
-        exec_ts = datetime.strptime(self.params.get_date_to(), '%Y-%m-%d')
-        last_ts = exec_ts - timedelta(days=1)
+        exec_date = datetime.strptime(self.params.get_date_to(), '%Y-%m-%d')
 
         # Extract the last 20 request rows
         df_tmp = df_req.tail(20)
-        df_tmp['datetime_req'] = df_tmp['Timestamp'].map(lambda x: datetime.strptime(x, '%m/%d/%Y %H:%M:%S'))
-        new_req = df_tmp[(last_ts < df_tmp['datetime_req']) & (df_tmp['datetime_req'] <= exec_ts)]
+        df_tmp['datetime_req'] = df_tmp['Timestamp'].map(lambda x: datetime.strptime(x, '%Y-%m-%d'))
+        new_req = df_tmp[df_tmp['datetime_req'] == exec_date]
 
         return new_req
