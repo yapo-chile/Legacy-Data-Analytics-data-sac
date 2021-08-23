@@ -49,7 +49,7 @@ class UserQuery(Query):
         SELECT
             user_id
         FROM
-            users
+            public.users
         WHERE 
             email IN ({emails_str})
         """
