@@ -30,9 +30,10 @@ class User(UserQuery):
         phones = []
         for schema in blocket_schemas:
             phones_df = db_source.select_to_dict(query=self.query_phones(user_ids, schema))
-            phones += phones_df['phone'].tolist()
-        db_source.close_connection()
+            if not phones_df.empty:
+                phones += phones_df['phone'].tolist()
 
+        db_source.close_connection()
         # Remove duplicated results
         phones = list(set(phones))
 
@@ -46,9 +47,10 @@ class User(UserQuery):
         users = []
         for schema in blocket_schemas:
             users_df = db_source.select_to_dict(query=self.query_users(phones, schema))
-            users += users_df['user_id'].tolist()
-        db_source.close_connection()
+            if not users_df.empty:
+                users += users_df['user_id'].tolist()
 
+        db_source.close_connection()
         # Remove duplicated results
         users = list(set(users))
 
