@@ -9,11 +9,12 @@ class RequestManager:
 
     def get_new_requests(self, df_req: type[DataFrame]) -> type[DataFrame]:
 
-        exec_date = datetime.strptime(self.params.get_date_to(), '%Y-%m-%d')
+        exec_date = self.params.get_date_to()
 
         # Extract the last 20 request rows
         df_tmp = df_req.tail(20)
-        df_tmp['datetime_req'] = df_tmp['Timestamp'].map(lambda x: datetime.strptime(x, '%Y-%m-%d'))
-        new_req = df_tmp[df_tmp['datetime_req'] == exec_date]
+        df_tmp['date_req'] = df_tmp['Timestamp']\
+            .map(lambda x: datetime.strptime(x, '%m/%d/%Y %H:%M:%S').strftime('%Y/%m/%d'))
+        new_req = df_tmp[df_tmp['date_req'] == exec_date]
 
         return new_req
