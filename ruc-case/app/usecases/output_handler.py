@@ -53,7 +53,7 @@ class OutputHandler:
                  ruc_id: str,
                  requester_email: str) -> None:
 
-        today = self.params.get_current_date()
+        today = self.params.get_date_to()
         filename = f'{today} RUC {ruc_id}.xlsx'
 
         self.create_excel(filename, ads_info, ad_reply)
