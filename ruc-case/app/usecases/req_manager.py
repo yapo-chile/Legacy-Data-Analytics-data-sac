@@ -15,6 +15,6 @@ class RequestManager:
         # Extract the last 20 request rows
         df_tmp = df_req.tail(20)
         df_tmp['datetime_req'] = df_tmp['Timestamp'].map(lambda x: datetime.strptime(x, '%m/%d/%Y %H:%M:%S'))
-        new_req = df_tmp[(last_ts < df_tmp['datetime_req']) & (df_tmp['datetime_req'] < exec_ts)]
+        new_req = df_tmp[(last_ts < df_tmp['datetime_req']) & (df_tmp['datetime_req'] <= exec_ts)]
 
         return new_req
