@@ -25,7 +25,10 @@ class OutputHandler:
 
         data = open(filename, 'rb').read()
         encoded = base64.b64encode(data).decode('UTF-8')
-        body = f""" <h3>Estimad@s, 
+        self.logger.info(f'param email_to: {self.params.email_to}')
+        email_to = self.params.email_to.append(requester_email)
+        self.logger.info(f'final email_to: {email_to}')
+        body = f""" <h3>Estimad@s,
 
         Se adjunta archivo excel con los avisos y conversaciones encontrados en nuestro sitio asociados al RUC {ruc_id}.
 
@@ -35,7 +38,7 @@ class OutputHandler:
         <h6><i>Este mensaje fue generado de forma automatica,
         por favor no responder</i></h6>"""
 
-        email = Email(to=self.params.email_to + "," + requester_email,
+        email = Email(to=email_to,
                       subject=f"Información Caso RUC: {ruc_id}",
                       message=body
                       )
