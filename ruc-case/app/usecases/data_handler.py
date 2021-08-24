@@ -26,8 +26,6 @@ class DataHandler:
     @input_phones.setter
     def input_phones(self, input_phones: str) -> None:
 
-        if type(input_phones) == float:
-            input_phones = str(int(input_phones))
         # Validate the input phones string format
         self.validate_array_like_string(input_phones)
         # Parse the string
