@@ -22,11 +22,11 @@ class RequestFactory:
         input_phones = row[cols_dict['phones']]
         ruc_id = row[cols_dict['ruc_id']]
         req_email = row[cols_dict['requester_email']]
-        if type(req_email) == list:  # FIXME
-            req_email = ",".join(req_email)
 
         self.logger.info(f'Starting RUC Case {ruc_id}')
         self.logger.info(f'input emails: {input_emails}, input phones: {input_phones}')
+        self.logger.ingo(f'requester email: {req_email}')
+
         emails, phones = DataHandler(logger=self.logger) \
             .clean_and_parse(input_emails, input_phones)
         self.logger.info(f"Data handler output: user_ids: {emails}, phones: {phones}")

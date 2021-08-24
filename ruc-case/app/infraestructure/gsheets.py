@@ -15,4 +15,7 @@ class GoogleSheets:
     def get_data(self) -> type[DataFrame]:
 
         url = f'https://docs.google.com/spreadsheets/d/{self.conf.sheet_id}/gviz/tq?tqx=out:csv&sheet={self.conf.sheet_name}'
-        return pd.read_csv(url, error_bad_lines=False)
+
+        return pd.read_csv(url,
+                           on_bad_lines='warn',
+                           dtype='object')
