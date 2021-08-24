@@ -5,8 +5,9 @@ from infraestructure.email import Email
 
 class OutputHandler:
 
-    def __init__(self, logger, params):
+    def __init__(self, logger, config, params):
         self.logger = logger
+        self.config = config
         self.params = params
 
     def create_excel(self,
@@ -35,7 +36,9 @@ class OutputHandler:
         <h6><i>Este mensaje fue generado de forma automatica,
         por favor no responder</i></h6>"""
 
-        email = Email(email_to=email_to,
+        email = Email(params=self.params,
+                      conf=self.config,
+                      email_to=email_to,
                       subject=f"Información Caso RUC: {ruc_id}",
                       body=body)
         email.send_email_with_excel(excel_files=[filename])

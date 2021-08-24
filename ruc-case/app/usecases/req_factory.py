@@ -39,6 +39,7 @@ class RequestFactory:
             .generate(users_found, blocket_schemas)
         self.logger.info(f'RUC Case: found {df_ads.shape[0]} ads and {df_adreply.shape[0]} ad replies')
         OutputHandler(logger=self.logger,
+                      config=self.config,
                       params=self.params) \
             .generate(df_ads, df_adreply, ruc_id, req_email)
         self.logger(f'RUC Case {ruc_id} finished')
