@@ -56,7 +56,9 @@ class OutputHandler:
         today = self.params.get_date_to()
         filename = f'{today} RUC {ruc_id}.xlsx'
 
+        # Create Excel file
         self.create_excel(filename, ads_info, ad_reply)
         self.logger.info(f'Ruc Case {ruc_id} exported to sheets')
+        # Send email
         self.send_email(filename, requester_email, ruc_id)
         self.logger.info('Email sent successfully')
