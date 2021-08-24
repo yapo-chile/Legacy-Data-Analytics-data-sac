@@ -72,6 +72,7 @@ class User(UserQuery):
             # Remove generic phones and phones found before
             new_phones = [phone for phone in new_phones
                           if phone not in generic_phones + phones_found]
+            self.logger.info(f'New phone numbers found: {new_phones}')
             # Add new phones to the found phones found variable
             phones_found += new_phones
             # Search at the first iteration only for every phone found yet
