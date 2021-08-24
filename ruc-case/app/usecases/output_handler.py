@@ -35,7 +35,7 @@ class OutputHandler:
         <h6><i>Este mensaje fue generado de forma automatica,
         por favor no responder</i></h6>"""
 
-        email = Email(to=self.params.email_to + requester_email,
+        email = Email(to=self.params.email_to + "," + requester_email,
                       subject=f"Inserting Fee Sellers with Yapesos info",
                       message=body
                       )
