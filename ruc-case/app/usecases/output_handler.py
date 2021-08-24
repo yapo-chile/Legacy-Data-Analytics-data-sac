@@ -26,7 +26,8 @@ class OutputHandler:
         data = open(filename, 'rb').read()
         encoded = base64.b64encode(data).decode('UTF-8')
         self.logger.info(f'param email_to: {self.params.email_to}')
-        email_to = self.params.email_to.append(requester_email)
+        email_to = ['gp_data_analytics@yapo.cl',
+                    'customer.care@yapo.cl'] + [requester_email]
         self.logger.info(f'final email_to: {email_to}')
         body = f""" <h3>Estimad@s,
 
@@ -38,7 +39,7 @@ class OutputHandler:
         <h6><i>Este mensaje fue generado de forma automatica,
         por favor no responder</i></h6>"""
 
-        email = Email(to=email_to,
+        email = Email(email_to=email_to,
                       subject=f"Información Caso RUC: {ruc_id}",
                       message=body
                       )
