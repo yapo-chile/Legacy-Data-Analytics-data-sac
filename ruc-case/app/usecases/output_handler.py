@@ -1,6 +1,4 @@
 from __future__ import annotations
-import base64
-import os
 from pandas import ExcelWriter
 from infraestructure.email import Email
 
@@ -23,8 +21,6 @@ class OutputHandler:
 
     def send_email(self, filename: str, ruc_id: str, requester_email: str) -> None:
 
-        data = open(filename, 'rb').read()
-        encoded = base64.b64encode(data).decode('UTF-8')
         self.logger.info(f'param email_to: {self.params.email_to}')
         email_to = ['gp_data_analytics@yapo.cl',
                     'customer.care@yapo.cl'] + [requester_email]
@@ -41,15 +37,8 @@ class OutputHandler:
 
         email = Email(email_to=email_to,
                       subject=f"Información Caso RUC: {ruc_id}",
-                      message=body
-                      )
-        email.attach(
-            filename,
-            encoded,
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        email.send()
-        # Removing file
-        os.remove(filename)
+                      body=body)
+        email.send_email_with_excel(excel_files=[filename])
 
     def generate(self,
                  ads_info: type[DataFrame],

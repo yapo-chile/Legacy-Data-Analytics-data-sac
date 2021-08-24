@@ -9,6 +9,7 @@ from email.encoders import encode_base64
 from infraestructure.conf import getConf
 from utils.read_params import ReadParams
 
+
 class Email:
     """
     Class that allow send email
@@ -69,13 +70,11 @@ class Email:
             self.logger.info('File {} charged'.format(file[0]))
         self.send_email(msg)
 
-    def send_email_with_excel(self, data_to_send):
+    def send_email_with_excel(self, excel_files: list) -> None:
         """
         Method [send_email_with_excel] send a email with one or multiples
         excel files attached to recipients.
-        Param [ data_to send ] is a array of tuple composed by
-                (name_file_send, dataframe)
-            Param [name_file_send] is the name of file,
+        Param [ excel_files ] list of excel files. The name of files
                 must contain the extension ".xls"
             Param [dataframe_to_excel] is a pandas dataframe with data that
                 will be saved as a xls and sent
@@ -86,14 +85,13 @@ class Email:
         msg['From'] = self.email_from
         msg['To'] = ", ".join(self.email_to)
         msg.attach(MIMEText(self.body, 'plain'))
-        for file in data_to_send:
+        for filename in excel_files:
             self.logger.info('Charging files')
-            file[1].to_excel(file[0], index=False)
             part = MIMEBase('application', "octet-stream")
-            part.set_payload(open(file[0], "rb").read())
+            part.set_payload(open(filename, "rb").read())
             encode_base64(part)
             part.add_header('Content-Disposition',
-                            'attachment', filename=file[0])
+                            'attachment', filename=filename)
             msg.attach(part)
-            self.logger.info('File {} charged'.format(file[0]))
+            self.logger.info('File {} charged'.format(filename))
         self.send_email(msg)
