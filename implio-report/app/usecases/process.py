@@ -16,7 +16,7 @@ class Process:
         self.config = config
         self.params = params
 
-    def generate(self):
+    def generate(self) -> None:
 
         self.logger.info('The process begins')
         df_report = ImplioReport(logger=self.logger,
@@ -24,7 +24,7 @@ class Process:
                                  params=self.params)\
             .generate()
         self.logger.info(f'Report generated successfully, found {df_report.shape[0]} records')
-        OutputHandler(config=self.config,
+        OutputHandler(logger=self.logger,
                       params=self.params)\
             .send_email(data=df_report)
-        self.logger.info('Email sent successfully')
+        self.logger.info('Process end successfully')
