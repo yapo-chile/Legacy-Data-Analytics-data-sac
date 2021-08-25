@@ -1,4 +1,6 @@
 from __future__ import annotations
+import os
+import base64
 from pandas import ExcelWriter
 from infraestructure.email import Email
 
@@ -26,6 +28,8 @@ class OutputHandler:
         email_to = ['gp_data_analytics@yapo.cl',
                     'customer.care@yapo.cl'] + [requester_email]
         self.logger.info(f'final email_to: {email_to}')
+
+        subject = f"Información Caso RUC: {ruc_id}"
         body = f""" <h3>Estimad@s,
 
         Se adjunta archivo excel con los avisos y conversaciones encontrados en nuestro sitio asociados al RUC {ruc_id}.
@@ -36,12 +40,18 @@ class OutputHandler:
         <h6><i>Este mensaje fue generado de forma automatica,
         por favor no responder</i></h6>"""
 
-        email = Email(params=self.params,
-                      conf=self.config,
-                      email_to=email_to,
-                      subject=f"Información Caso RUC: {ruc_id}",
-                      body=body)
-        email.send_email_with_excel(excel_files=[filename])
+        # Sending email
+        data = open(filename, 'rb').read()
+        encoded = base64.b64encode(data).decode('UTF-8')
+        email = Email(to=email_to,
+                      subject=subject,
+                      message=body)
+        email.attach(filename=filename,
+                     binary=encoded,
+                     file_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        email.send()
+        # Removing file
+        os.remove(filename)
 
     def generate(self,
                  ads_info: type[DataFrame],
