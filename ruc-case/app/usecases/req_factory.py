@@ -42,4 +42,4 @@ class RequestFactory:
                       config=self.config,
                       params=self.params) \
             .generate(df_ads, df_adreply, ruc_id, req_email)
-        self.logger(f'RUC Case {ruc_id} finished')
+        self.logger.info(f'RUC Case {ruc_id} finished')
