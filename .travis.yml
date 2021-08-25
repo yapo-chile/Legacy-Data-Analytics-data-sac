@@ -1,3 +1,6 @@
+install:
+  - configure_docker
+
 language: python
 matrix:
   include:
