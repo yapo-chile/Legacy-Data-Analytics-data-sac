@@ -44,7 +44,7 @@
       minute: '0'
       seconds: '0'
     weekday:
-      day: '1'
+      day: '*'
     year: '*'
   scheduleEnabled: true
   sequence:
