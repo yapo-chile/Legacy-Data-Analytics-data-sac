@@ -2,12 +2,8 @@
   description: |-
         https://github.mpi-internal.com/Yapo/data-sac/tree/master/implio-report
         sudo docker run --rm --net=host \
-                        -v /home/bnbiuser/secrets/pulse_auth:/app/pulse-secret \
-                        -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
-                        -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
-                        -e APP_PULSE_SECRET=/app/pulse-secret \
-                        -e APP_DB_SECRET=/app/db-secret \
-                        -e APP_SMTP_SECRET=/app/smtp-secret \
+                        -v /home/bnbiuser/secrets/blocket_db:/app/db-blocket \
+                        -e APP_BLOCKET_SECRET=/app/db-blocket \
                         containers.mpi-internal.com/yapo/implio_report:[git-branch] \
                         -email_from="noreply@yapo.cl" \
                         -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"
@@ -32,10 +28,8 @@
     - script: |-
         sudo docker pull containers.mpi-internal.com/yapo/implio_report:[git-branch]
         sudo docker run --rm --net=host \
-                        -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
-                        -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
-                        -e APP_DB_SECRET=/app/db-secret \
-                        -e APP_SMTP_SECRET=/app/smtp-secret \
+                        -v /home/bnbiuser/secrets/blocket_db:/app/db-blocket \
+                        -e APP_BLOCKET_SECRET=/app/db-blocket \
                         containers.mpi-internal.com/yapo/implio_report:[git-branch] \
                         -email_from="noreply@yapo.cl" \
                         -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"
