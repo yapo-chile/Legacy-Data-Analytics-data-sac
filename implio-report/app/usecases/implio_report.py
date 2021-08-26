@@ -1,5 +1,5 @@
 from __future__ import annotations
-from infraestructure.psql import DataBase
+from infraestructure.psql import Database
 from utils.query import ImplioReportQuery
 
 
@@ -12,7 +12,7 @@ class ImplioReport(ImplioReportQuery):
 
     def get_data(self) -> type[DataFrame]:
 
-        db_source = DataBase(conf=self.config.blocket)
+        db_source = Database(conf=self.config.blocket)
         df_data = db_source.select_to_dict(query=self.query_implio_report())
         db_source.close_connection()
 
