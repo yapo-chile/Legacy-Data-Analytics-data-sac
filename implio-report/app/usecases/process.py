@@ -26,5 +26,5 @@ class Process:
         self.logger.info(f'Report generated successfully, found {df_report.shape[0]} records')
         OutputHandler(logger=self.logger,
                       params=self.params)\
-            .send_email(data=df_report)
+            .generate(data=df_report)
         self.logger.info('Process end successfully')
