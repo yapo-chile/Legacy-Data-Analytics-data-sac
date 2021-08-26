@@ -1,5 +1,5 @@
 from __future__ import annotations
-from utils.infraestructure.psql import DataBase
+from infraestructure.psql import DataBase
 from utils.query import ImplioReportQuery
 
 
