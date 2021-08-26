@@ -45,7 +45,7 @@ class OutputHandler:
                       message=body)
         email.attach(filename=filename,
                      binary=encoded,
-                     file_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                     file_type="ext/csv")
         email.send()
         # Removing file
         os.remove(filename)
