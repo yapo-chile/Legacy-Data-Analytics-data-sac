@@ -34,4 +34,4 @@ class ImplioReportQuery:
             ad_id, action_id
         """
 
-        return
+        return query
