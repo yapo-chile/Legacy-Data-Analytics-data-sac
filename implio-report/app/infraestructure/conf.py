@@ -1,8 +1,6 @@
 import environ
 
-
-INI_PULSE = environ.secrets.INISecrets.from_path_in_env("APP_PULSE_SECRET")
-INI_DB = environ.secrets.INISecrets.from_path_in_env("APP_DB_SECRET")
+INI_BLOCKET = environ.secrets.INISecrets.from_path_in_env("APP_BLOCKET_SECRET")
 
 
 @environ.config(prefix="APP")
