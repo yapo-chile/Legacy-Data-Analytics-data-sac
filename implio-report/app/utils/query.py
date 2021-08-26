@@ -33,3 +33,5 @@ class ImplioReportQuery:
         GROUP BY 
             ad_id, action_id
         """
+
+        return
