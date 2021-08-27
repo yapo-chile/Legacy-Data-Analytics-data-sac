@@ -13,7 +13,8 @@ class OutputHandler:
 
     def create_csv(self, filename: str, data: type[DataFrame]) -> None:
 
-        data.to_csv(filename, index=False)
+        compress_dict = dict(method='zip', archive_name=filename)
+        data.to_csv(filename, compression=compress_dict, index=False)
 
     def send_email(self, filename: str, row_count: int) -> None:
 
@@ -43,7 +44,7 @@ class OutputHandler:
                       message=body)
         email.attach(filename=filename,
                      binary=encoded,
-                     file_type="ext/csv")
+                     file_type="application/zip")
         email.send()
         # Removing file
         os.remove(filename)
@@ -51,7 +52,7 @@ class OutputHandler:
     def generate(self, data: type[DataFrame]) -> None:
 
         year_month = self.params.get_last_month()
-        filename = f'implio_null_revisions_{year_month}.csv'
+        filename = f'implio_null_revisions_{year_month}.zip'
         row_count = data.shape[0]
 
         # Create Excel file
