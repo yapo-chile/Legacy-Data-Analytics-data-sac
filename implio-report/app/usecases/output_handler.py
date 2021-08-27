@@ -24,8 +24,8 @@ class OutputHandler:
         month_name = calendar.month_name[last_month]
 
         # Define Email parameters
-        email_to = ['gp_data_analytics@yapo.cl', 'customer.care@yapo.cl']
-        subject = f'Implio null revisions {month_name} {year_lm}'
+        email_to = ['gp_data_analytics@yapo.cl', 'customer.care@yapo.cl', 'fernando.palomera@yapo.cl'] #TEST
+        subject = f'(THIS IS A TEST) Implio null revisions {month_name} {year_lm}' #TEST
         body = f""" <h3>Estimad@s, 
         
         Se adjunta la base correspondiente al pasado mes, donde se obtienen {row_count} registros.
@@ -42,9 +42,9 @@ class OutputHandler:
         email = Email(to=email_to,
                       subject=subject,
                       message=body)
-        email.attach(filename=filename,
-                     binary=encoded,
-                     file_type="application/zip")
+        #email.attach(filename=filename,
+                     #binary=encoded,
+                     #file_type="application/zip")
         email.send()
         # Removing file
         os.remove(filename)
