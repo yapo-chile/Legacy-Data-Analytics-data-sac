@@ -2,7 +2,6 @@ from __future__ import annotations
 import os
 import base64
 import calendar
-from pandas import ExcelWriter
 from infraestructure.email import Email
 
 
@@ -14,8 +13,7 @@ class OutputHandler:
 
     def create_csv(self, filename: str, data: type[DataFrame]) -> None:
 
-        with ExcelWriter(filename) as writer:
-            data.to_excel(writer, sheet_name='implio', index=False)
+        data.to_csv(filename, index=False)
 
     def send_email(self, filename: str, row_count: int) -> None:
 
