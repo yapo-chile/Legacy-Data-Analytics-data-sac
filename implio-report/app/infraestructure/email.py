@@ -12,6 +12,7 @@ class Email:
         self._name = name
         self._subject = subject
         self._message = message
+        self.to_attach = None
         self.log = logging.getLogger('email')
 
     def attach(self, filename, binary, file_type):
