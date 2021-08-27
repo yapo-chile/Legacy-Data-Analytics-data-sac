@@ -24,8 +24,8 @@ class OutputHandler:
         month_name = calendar.month_name[last_month]
 
         # Define Email parameters
-        email_to = ['gp_data_analytics@yapo.cl', 'customer.care@yapo.cl', 'fernando.palomera@yapo.cl'] #TEST
-        subject = f'(THIS IS A TEST) Implio null revisions {month_name} {year_lm}' #TEST
+        email_to = ['gp_data_analytics@yapo.cl', 'customer.care@yapo.cl', 'fernando.palomera@yapo.cl'] # FIXME: TEST
+        subject = f'(THIS IS A TEST) Implio null revisions {month_name} {year_lm}'  # FIXME: TEST
         body = f""" <h3>Estimad@s, 
         
         Se adjunta la base correspondiente al pasado mes, donde se obtienen {row_count} registros.
@@ -42,21 +42,22 @@ class OutputHandler:
         email = Email(to=email_to,
                       subject=subject,
                       message=body)
-        #email.attach(filename=filename,
-                     #binary=encoded,
-                     #file_type="application/zip")
+        email.attach(filename=filename,
+                     binary=encoded,
+                     file_type="text/csv")  # FIXME: TEST
         email.send()
         # Removing file
-        os.remove(filename)
+        #os.remove(filename)  # FIXME: TEST
 
     def generate(self, data: type[DataFrame]) -> None:
 
         year_month = self.params.get_last_month()
-        filename = f'implio_null_revisions_{year_month}.zip'
+        #filename = f'implio_null_revisions_{year_month}.zip'
+        filename = 'implio_null_revisions_202107.csv'  # FIXME: TEST
         row_count = data.shape[0]
 
         # Create Excel file
-        self.create_csv(filename, data)
+        #self.create_csv(filename, data)  # FIXME: TEST
         self.logger.info(f'Report exported to csv')
         # Send email
         self.send_email(filename, row_count)

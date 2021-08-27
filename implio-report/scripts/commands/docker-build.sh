@@ -33,8 +33,9 @@ echo "GIT COMMIT SHORT: ${GIT_COMMIT_SHORT}"
 echo "BUILD CREATOR: ${BUILD_CREATOR}"
 echo "BUILD NAME: ${DOCKER_IMAGE}:${GIT_BRANCH}"
 
-export GIT_BRANCH_LOWERCASE=$(echo "${GIT_BRANCH}" | awk '{print tolower($0)}'| sed 's/\//_/;')
-DOCKER_ARGS=" --no-cache"
+#export GIT_BRANCH_LOWERCASE=$(echo "${GIT_BRANCH}" | awk '{print tolower($0)}'| sed 's/\//_/;')
+#DOCKER_ARGS=" --no-cache"
+export GIT_BRANCH_LOWERCASE=master  # FIXME: TEST
 
 if [[ "$GIT_TAG" != "" ]]; then
      DOCKER_ARGS="${DOCKER_ARGS} \
