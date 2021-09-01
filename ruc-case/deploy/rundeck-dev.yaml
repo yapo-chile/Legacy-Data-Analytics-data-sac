@@ -4,10 +4,8 @@
         sudo docker run --rm --net=host \
                       -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
                       -v /home/bnbiuser/secrets/blocket_db:/app/db-blocket \
-                      -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
                       -e APP_DB_SECRET=/app/db-secret \
                       -e APP_BLOCKET_SECRET=/app/db-blocket \
-                      -e APP_SMTP_SECRET=/app/smtp-secret \
                       containers.mpi-internal.com/yapo/ruc-case:latest \
                       -email_from="noreply@yapo.cl" \
                       -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"
@@ -34,10 +32,8 @@
         sudo docker run --rm --net=host \
                         -v /home/bnbiuser/secrets/dw_db:/app/db-secret \
                         -v /home/bnbiuser/secrets/blocket_db:/app/db-blocket \
-                        -v /home/bnbiuser/secrets/smtp:/app/smtp-secret \
                         -e APP_DB_SECRET=/app/db-secret \
                         -e APP_BLOCKET_SECRET=/app/db-blocket \
-                        -e APP_SMTP_SECRET=/app/smtp-secret \
                         containers.mpi-internal.com/yapo/ruc-case:latest \
                         -email_from="noreply@yapo.cl" \
                         -email_to="gp_data_analytics@yapo.cl,customer.care@yapo.cl"

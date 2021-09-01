@@ -28,6 +28,7 @@ class OutputHandler:
         email_to = ['gp_data_analytics@yapo.cl',
                     'customer.care@yapo.cl'] + [requester_email]
         self.logger.info(f'final email_to: {email_to}')
+        email_from = 'noreply@yapo.cl'
 
         subject = f"Información Caso RUC: {ruc_id}"
         body = f""" <h3>Estimad@s,
@@ -43,7 +44,8 @@ class OutputHandler:
         # Sending email
         data = open(filename, 'rb').read()
         encoded = base64.b64encode(data).decode('UTF-8')
-        email = Email(to=email_to,
+        email = Email(email_from=email_from,
+                      to=email_to,
                       subject=subject,
                       message=body)
         email.attach(filename=filename,
