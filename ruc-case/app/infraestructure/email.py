@@ -7,7 +7,8 @@ import requests
 
 class Email:
 
-    def __init__(self, to, subject, message, name="Data") -> None:
+    def __init__(self, email_from, to, subject, message, name="Data") -> None:
+        self._from = email_from
         self._to = to
         self._name = name
         self._subject = subject
@@ -26,7 +27,9 @@ class Email:
                 "Host": "mailer.pro.yapo.cl"}
 
     def send(self):
-        body = {"to": self._to,
+        body = {
+                "source_email": self._from,
+                "to": self._to,
                 "subject": self._subject,
                 "html_message": self._message,
                 "name": [self._name]}
