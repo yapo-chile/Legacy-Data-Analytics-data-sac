@@ -35,11 +35,17 @@ class RequestFactory:
             .search(emails, phones, generic_phones, blocket_schemas,
                     early_stop=5)
         self.logger.info(f'Users found after iterative process: {users_found}')
-        df_ads, df_adreply = RucCase(config=self.config) \
-            .generate(users_found, blocket_schemas)
-        self.logger.info(f'RUC Case: found {df_ads.shape[0]} ads and {df_adreply.shape[0]} ad replies')
-        OutputHandler(logger=self.logger,
-                      config=self.config,
-                      params=self.params) \
-            .generate(df_ads, df_adreply, ruc_id, req_email)
-        self.logger.info(f'RUC Case {ruc_id} finished')
+
+        if users_found:
+
+            df_ads, df_adreply = RucCase(config=self.config) \
+                .generate(users_found, blocket_schemas)
+            self.logger.info(f'RUC Case: found {df_ads.shape[0]} ads and {df_adreply.shape[0]} ad replies')
+            OutputHandler(logger=self.logger,
+                          config=self.config,
+                          params=self.params) \
+                .generate(df_ads, df_adreply, ruc_id, req_email)
+            self.logger.info(f'RUC Case {ruc_id} finished')
+        else:
+            self.logger.info('Ending the process because no associated user_id was found')
+
