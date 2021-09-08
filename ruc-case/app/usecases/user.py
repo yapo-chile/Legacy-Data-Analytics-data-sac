@@ -71,7 +71,7 @@ class User(UserQuery):
             new_phones = self.get_phones_by_users(new_users, blocket_schemas)
             # Remove generic phones and phones found before
             new_phones = [phone for phone in new_phones
-                          if phone not in generic_phones + phones_found]
+                          if phone not in generic_phones + phones_found + ['']]
             self.logger.info(f'New phone numbers found: {new_phones}')
             # Add new phones to the found phones found variable
             phones_found += new_phones
@@ -84,7 +84,7 @@ class User(UserQuery):
             new_users = self.get_users_by_phones(new_phones, blocket_schemas)
             # Remove and users found before
             new_users = [user for user in new_users
-                         if user not in users_found]
+                         if user not in users_found + ['']]
             if not new_users:
                 break
             else:
