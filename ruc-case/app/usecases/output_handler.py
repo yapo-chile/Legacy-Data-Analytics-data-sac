@@ -18,7 +18,7 @@ class OutputHandler:
                      ad_reply: type[DataFrame]
                      ) -> None:
 
-        with ExcelWriter(filename) as writer:
+        with ExcelWriter(filename, engine='xlsxwriter') as writer:
             ads_info.to_excel(writer, sheet_name='ads', index=False)
             ad_reply.to_excel(writer, sheet_name='ad_reply', index=False)
 
